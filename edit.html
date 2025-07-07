@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Foto - PhotoBooth</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        font-family: "Poppins", sans-serif;
+        color: #1f2937;
+        position: relative;
+      }
+
+      .navbar {
+        background-color: transparent;
+        border-bottom: 1px solid #e5e7eb;
+        backdrop-filter: blur(10px);
+      }
+
+      .navbar-brand {
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #1f2937;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        color: #1f2937 !important;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #8b3a4e !important;
+      }
+
+      .edit-title {
+        font-weight: 700;
+        font-size: 2rem;
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .photo-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .photo-card {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s ease;
+        text-align: center;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .photo-card img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        transition: border 0.3s ease;
+      }
+
+      .form-select {
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        background-color: #f9fafb;
+        border: 1px solid #d1d5db;
+        box-shadow: none;
+      }
+
+      .btn-download {
+        margin-top: 10px;
+        font-size: 0.85rem;
+        border-radius: 999px;
+        padding: 6px 18px;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 60px;
+        padding: 40px 20px;
+        font-size: 0.9rem;
+        color: #9ca3af;
+      }
+
+      #collagePreview img {
+        border-radius: 12px;
+        margin-top: 20px;
+        border: 5px solid #d1d5db;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">photobooth</a>
+        <div class="ms-auto">
+          <ul class="navbar-nav d-flex flex-row gap-3">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="start.html">Start</a></li>
+            <li class="nav-item"><a class="nav-link active" href="edit.html">Edit</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1 class="edit-title" data-aos="fade-up">Edit Hasil Foto</h1>
+      <p class="text-center text-muted" data-aos="fade-up" data-aos-delay="100">Ganti warna frame & download tiap foto</p>
+
+      <div class="photo-container" id="editGrid" data-aos="fade-up" data-aos-delay="200"></div>
+
+      <!-- Tombol Kolase -->
+      <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-dark rounded-pill px-4 py-2" onclick="generateCollage('vertical')">📥 Kolase Vertikal</button>
+          <button class="btn btn-outline-dark rounded-pill px-4 py-2" onclick="generateCollage('horizontal')">🧭 Kolase Horizontal</button>
+          <button class="btn btn-outline-dark rounded-pill px-4 py-2" onclick="generateCollage('grid')">🔳 Kolase Grid 2x2</button>
+        </div>
+        <div id="collagePreview" class="mt-4"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 – Dibuat penuh gaya oleh <strong>Ken Zamariyan</strong></p>
+    </footer>
+
+    <!-- Script -->
+    <script>
+      const photos = JSON.parse(sessionStorage.getItem("photos") || "[]");
+      const editGrid = document.getElementById("editGrid");
+
+      const frameColors = {
+        putih: "#ffffff",
+        hitam: "#111827",
+        merah: "#dc2626",
+        pink: "#f472b6",
+        gold: "#facc15",
+      };
+
+      photos.forEach((src, i) => {
+        const card = document.createElement("div");
+        card.className = "photo-card";
+        card.innerHTML = `
+        <img src="${src}" id="photo-${i}" style="border: 6px solid #ffffff" />
+        <select class="form-select mt-2" onchange="changeFrame(${i}, this.value)">
+          <option value="putih">Putih</option>
+          <option value="hitam">Hitam</option>
+          <option value="merah">Merah</option>
+          <option value="pink">Pink</option>
+          <option value="gold">Gold</option>
+        </select>
+        <a href="${src}" download="photo-${i + 1}.png" class="btn btn-sm btn-outline-primary btn-download">⬇️ Download</a>
+      `;
+        editGrid.appendChild(card);
+      });
+
+      function changeFrame(index, color) {
+        const img = document.getElementById("photo-" + index);
+        img.style.border = "6px solid " + (frameColors[color] || "#ffffff");
+      }
+
+      function generateCollage(type = "vertical") {
+        if (photos.length === 0) return;
+
+        const imgW = 400;
+        const imgH = 300;
+        const spacing = 20;
+
+        let canvas, ctx;
+
+        if (type === "horizontal") {
+          canvas = document.createElement("canvas");
+          canvas.width = photos.length * (imgW + spacing) - spacing;
+          canvas.height = imgH;
+          ctx = canvas.getContext("2d");
+
+          photos.forEach((src, i) => {
+            const img = new Image();
+            img.onload = () => {
+              ctx.drawImage(img, i * (imgW + spacing), 0, imgW, imgH);
+              if (i === photos.length - 1) showPreview(canvas);
+            };
+            img.src = src;
+          });
+        } else if (type === "grid") {
+          const cols = 2;
+          const rows = Math.ceil(photos.length / 2);
+          canvas = document.createElement("canvas");
+          canvas.width = cols * (imgW + spacing) - spacing;
+          canvas.height = rows * (imgH + spacing) - spacing;
+          ctx = canvas.getContext("2d");
+
+          let loaded = 0;
+          photos.forEach((src, i) => {
+            const img = new Image();
+            img.onload = () => {
+              const x = (i % cols) * (imgW + spacing);
+              const y = Math.floor(i / cols) * (imgH + spacing);
+              ctx.drawImage(img, x, y, imgW, imgH);
+              loaded++;
+              if (loaded === photos.length) showPreview(canvas);
+            };
+            img.src = src;
+          });
+        } else {
+          // Vertical
+          canvas = document.createElement("canvas");
+          canvas.width = imgW;
+          canvas.height = photos.length * (imgH + spacing) - spacing;
+          ctx = canvas.getContext("2d");
+
+          let loaded = 0;
+          photos.forEach((src, i) => {
+            const img = new Image();
+            img.onload = () => {
+              ctx.drawImage(img, 0, i * (imgH + spacing), imgW, imgH);
+              loaded++;
+              if (loaded === photos.length) showPreview(canvas);
+            };
+            img.src = src;
+          });
+        }
+      }
+
+      function showPreview(canvas) {
+        const dataUrl = canvas.toDataURL("image/png");
+        document.getElementById("collagePreview").innerHTML = `
+        <img src="${dataUrl}" class="img-fluid rounded shadow-sm" />
+        <br/>
+        <a href="${dataUrl}" download="kolase-photobooth.png" class="btn btn-success rounded-pill mt-3 px-4">
+          💾 Simpan Kolase
+        </a>
+      `;
+      }
+
+      feather.replace();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

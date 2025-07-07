@@ -1,0 +1,312 @@
+/* ====== RESET & BASE ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ====== NAVBAR ====== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.nav-links a {
+  color: #374151;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-links a:hover {
+  background-color: #e5e7eb;
+}
+
+/* ====== HERO (INDEX PAGE) ====== */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 60px 30px;
+  background: linear-gradient(135deg, #edf2f7, #dbeafe);
+  border-radius: 24px;
+  margin: 40px 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  flex: 1 1 300px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #475569;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.start-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.start-btn:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* ====== ICON KIRI & KANAN (Hero) ====== */
+.icon-left,
+.icon-right {
+  max-width: 150px;
+  flex: 1 1 auto;
+}
+
+.icon-left img,
+.icon-right img {
+  width: 100%;
+  height: auto;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Label EST dan YEAR */
+.est,
+.year {
+  position: absolute;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.est {
+  top: 20px;
+  left: 30px;
+}
+
+.year {
+  top: 20px;
+  right: 30px;
+}
+
+/* ====== START.HTML (Booth Area) ====== */
+.booth-area {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.booth-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.booth-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.camera-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 3;
+}
+
+#video,
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+#frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 270px;
+  pointer-events: none;
+}
+
+/* ====== Selectors ====== */
+.frame-selector,
+.filter-selector {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.frame-selector label,
+.filter-selector label {
+  margin-right: 10px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.frame-selector select,
+.filter-selector select {
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+/* ====== Buttons ====== */
+.controls {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  padding: 10px 20px;
+  background-color: #4b5563;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: #374151;
+  transform: scale(1.05);
+}
+
+/* ====== FOOTER ====== */
+.footer {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 20px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .icon-left,
+  .icon-right {
+    max-width: 120px;
+  }
+
+  .start-btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  video,
+  canvas,
+  #frame {
+    width: 300px;
+    height: 225px;
+  }
+}
