@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PhotoBooth - Stylish</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
     <!-- Google Fonts: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
@@ -23,40 +22,40 @@
       }
 
       .navbar {
-        background-color: transparent;
-        backdrop-filter: blur(10px);
+        background-color: white;
         border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
       }
 
       .navbar-brand {
         font-weight: 700;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         color: #111827;
       }
 
       .nav-link {
         color: #374151 !important;
+        font-weight: 500;
         transition: all 0.3s ease;
-        border-radius: 6px;
       }
 
       .nav-link:hover {
-        background-color: #f1f5f9;
-        padding-inline: 10px;
+        color: #8b3a4e !important;
       }
 
       .hero-section {
-        padding: 100px 20px 80px;
-        border-radius: 20px;
-        text-align: center;
-        margin-top: 40px;
+        padding: 80px 16px;
         background: linear-gradient(to bottom right, #fdfdfd, #f9fafb);
+        border-radius: 16px;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.03);
+        max-width: 900px;
+        margin: 60px auto;
+        text-align: center;
       }
 
       .hero-title {
         font-weight: 700;
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         margin-bottom: 20px;
         color: #111827;
       }
@@ -76,11 +75,31 @@
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
+        margin-bottom: 30px;
+        display: inline-block;
       }
 
       .start-btn:hover {
         background-color: #ef4444;
         transform: scale(1.05);
+      }
+
+      .icon-img {
+        width: 100%;
+        max-width: 150px;
+        animation: float 4s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
       }
 
       .footer {
@@ -91,20 +110,18 @@
         font-size: 0.9rem;
       }
 
-      .icon-img {
-        max-width: 140px;
-        animation: float 4s ease-in-out infinite;
-      }
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 1.8rem;
+        }
 
-      @keyframes float {
-        0% {
-          transform: translateY(0px);
+        .hero-subtitle {
+          font-size: 0.95rem;
         }
-        50% {
-          transform: translateY(-10px);
-        }
-        100% {
-          transform: translateY(0px);
+
+        .icon-img {
+          max-width: 100px;
+          margin: 0 auto 16px;
         }
       }
     </style>
@@ -134,22 +151,21 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section container mt-5" data-aos="fade-up">
-      <div class="row align-items-center">
-        <div class="col-md-3 text-center mb-4 mb-md-0" data-aos="fade-right">
-          <img src="assets/1.jpeg" alt="icon kiri" class="icon-img" />
-        </div>
-        <div class="col-md-6">
-          <div>
-            <div class="text-muted mb-2" data-aos="fade-up">EST 2025</div>
-            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Capture the Moment</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Abadikan momenmu dalam strip lucu dan penuh gaya!</p>
-            <a href="start.html" class="start-btn" data-aos="zoom-in" data-aos-delay="300">Start Photobooth</a>
-          </div>
-        </div>
-        <div class="col-md-3 text-center" data-aos="fade-left">
-          <img src="assets/2.jpeg" alt="icon kanan" class="icon-img" />
-        </div>
+    <section class="hero-section" data-aos="fade-up">
+      <!-- Gambar Atas -->
+      <div class="mb-3" data-aos="fade-down">
+        <img src="assets/1.jpeg" alt="foto atas" class="icon-img mx-auto d-block" />
+      </div>
+
+      <div class="text-muted mb-2">EST 2025</div>
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">Capture the Moment</h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Abadikan momenmu dalam strip lucu dan penuh gaya!</p>
+
+      <a href="start.html" class="start-btn" data-aos="zoom-in" data-aos-delay="300">Start Photobooth</a>
+
+      <!-- Gambar Bawah -->
+      <div data-aos="fade-up" data-aos-delay="400">
+        <img src="assets/2.jpeg" alt="foto bawah" class="icon-img mx-auto d-block" />
       </div>
     </section>
 

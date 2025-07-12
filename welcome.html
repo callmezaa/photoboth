@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome - PhotoBooth</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- Bootstrap & Feather -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Lottie Web Component -->
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        height: 100%;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(to bottom right, #ffffff, #f0f4f8);
+        overflow: hidden;
+      }
+
+      .welcome-box {
+        height: 100%;
+        text-align: center;
+        animation: fadeIn 1s ease-in-out both;
+      }
+
+      .welcome-box h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-top: 10px;
+        color: #1f2937;
+      }
+
+      .welcome-box p {
+        font-size: 1rem;
+        color: #6b7280;
+        margin-bottom: 30px;
+      }
+
+      .btn-start {
+        background-color: #111827;
+        color: white;
+        padding: 10px 28px;
+        font-size: 1rem;
+        border-radius: 999px;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .btn-start:hover {
+        background-color: #374151;
+        transform: translateY(-2px);
+      }
+
+      .lottie-wrapper {
+        animation: pop 1s ease;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pop {
+        0% {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Loader sebelum masuk */
+      .loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: white;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeOut 1s 2s forwards;
+      }
+
+      .spinner-border {
+        width: 3rem;
+        height: 3rem;
+      }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div class="loader">
+      <div class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Welcome Content -->
+    <div class="welcome-box container d-flex flex-column align-items-center justify-content-center">
+      <div class="lottie-wrapper">
+        <dotlottie-wc src="https://lottie.host/1a2f9efe-7015-41af-85be-4f3d8817ec24/FnnwtkYH5l.lottie" style="width: 220px; height: 220px" speed="1" autoplay loop> </dotlottie-wc>
+      </div>
+
+      <h1>Selamat Datang!</h1>
+      <p>Yuk mulai keseruanmu bersama <strong>PhotoBooth</strong> 🎉</p>
+      <button class="btn btn-start" id="masukBtn">Masuk</button>
+    </div>
+
+    <!-- Script -->
+    <script>
+      document.getElementById("masukBtn").addEventListener("click", function () {
+        document.body.style.opacity = "0";
+        document.body.style.transition = "opacity 0.8s ease";
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 800);
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
